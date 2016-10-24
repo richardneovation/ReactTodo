@@ -101,4 +101,27 @@ describe('Reducers', () =>{
       expect(res[0].text).toEqual(todos[0].text);
     });
   });
+
+  describe('authReducer', () => {
+    it('should store uid on LOGIN', () => {
+      var action = {
+        type: 'LOGIN',
+        uid: 'someuid'
+      };
+
+      var res = reducers.authReducer(df({}), df(action));
+      expect(res).toEqual({uid:action.uid});
+    });
+
+    it('should set auth state to empty object on LOGOUT', () => {
+      var action = {
+        type: 'LOGOUT'
+      };
+      var authData = {
+        uid: 'someuid'
+      }
+      var res = reducers.authReducer(df(authData), df(action));
+      expect(res).toEqual({});
+    });
+  });
 });
