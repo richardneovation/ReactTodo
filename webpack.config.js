@@ -24,11 +24,6 @@ module.exports = {
       '$': 'jquery',
       'jQuery': 'jquery'
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
@@ -37,6 +32,11 @@ module.exports = {
         DATABASE_URL: JSON.stringify(process.env.DATABASE_URL),
         STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET),
         MESSAGING_SENDER_ID: JSON.stringify(process.env.MESSAGING_SENDER_ID)
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
       }
     })
   ],
@@ -77,5 +77,5 @@ module.exports = {
       path.resolve(__dirname, './node_modules/foundation-sites/scss')
     ]
   },
-  devtool: process.env.NODE_ENV === 'production' ? undefined : 'inline-source-map'
+  devtool: process.env.NODE_ENV === 'production' ? undefined : 'eval-cheap-module-source-map'
 };
