@@ -100,6 +100,22 @@ describe('Reducers', () =>{
       expect(res[0].completedAt).toBe(updates.completedAt);
       expect(res[0].text).toEqual(todos[0].text);
     });
+
+    it('should clear todos on LOGOUT', () => {
+      var todos = [{
+        id: '20',
+        text: 'Walk the dog',
+        completed: false,
+        createAt: 100,
+        completedAt: undefined
+      }];
+      var action = {
+        type: 'LOGOUT'
+      };
+
+      var res = reducers.todosReducer(df(todos), df(action));
+      expect(res.length).toBe(0);
+    });
   });
 
   describe('authReducer', () => {
